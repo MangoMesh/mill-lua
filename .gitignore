@@ -1,0 +1,6 @@
+.bsp/
+.metals/
+.vscode/
+example/
+0.11.6
+out/
