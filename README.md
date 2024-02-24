@@ -20,8 +20,10 @@ this integration, a Lua project should look like this:
 
 ```scala
 
-import $ivy.`com.ivmoreau::mill-lua:0.0.1`
+import $ivy.`com.ivmoreau::mill-lua::0.0.2`
 
+import mill._
+import mill.scalalib._
 import com.ivmoreau.lua._
 
 object example extends LuaModule {

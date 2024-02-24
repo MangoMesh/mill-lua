@@ -1,16 +1,18 @@
 import mill._
 import mill.scalalib._
 import mill.scalalib.publish._
-
+import mill.scalalib.api.ZincWorkerUtil._
 
 import $ivy.`io.chris-kipp::mill-ci-release::0.1.9`
 import io.kipp.mill.ci.release.CiReleaseModule
 import io.kipp.mill.ci.release.SonatypeHost
 
-object `mill-lua` extends Cross[LuaModuleCross]("0.11.7", "0.11.6", "0.10.15")
+val millVersions = Seq("0.11.7", "0.10.15")
+
+object `mill-lua` extends Cross[LuaModuleCross](millVersions)
 trait LuaModuleCross extends Cross.Module[String] with ScalaModule with CiReleaseModule {
   override def scalaVersion = "2.13.12"
-  override def artifactSuffix    = s"_mill${crossValue}" + super.artifactSuffix()
+  override def artifactName = s"mill-lua_mill${scalaNativeBinaryVersion(crossValue)}"
 
   override def compileIvyDeps = super.compileIvyDeps() ++ Agg(
     ivy"com.lihaoyi::mill-main:$crossValue",

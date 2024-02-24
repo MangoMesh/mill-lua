@@ -59,7 +59,7 @@ trait LuaModule extends mill.define.Module with LuaVersion with LSP { self =>
   /**
    * Runs this module's code in a lua ctx and waits for it to finish
    */
-  def run: mill.define.Command[Unit] = T.command {
+  def run(args: String*): mill.define.Command[Unit] = T.command {
     try Result.Success {
         resolveLuaRocks()
         os.proc(luaBinary(), sources().path.toString + "/" + main()).call(
